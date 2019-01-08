@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:23.0'
+    implementation 'org.apache.hadoop:hadoop-common:2.9.1'
+    implementation 'org.apache.hadoop:hadoop-hdfs:2.9.1'
+    implementation 'org.apache.hadoop:hadoop-client:2.9.1'
+
+    testImplementation 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'cn.thoughtworks.school.wc.WordCountMapReduce'
+        )
+    }
+}
+
+repositories {
+  maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+  mavenCentral()
+    jcenter()
+}
